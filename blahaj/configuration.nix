@@ -62,7 +62,6 @@
   nix.gc.automatic = true;
   nix.gc.dates = "daily";
   nix.gc.options = "--delete-older-than 7d";
-  # nix.settings.secret-key-files = [ "/etc/nix/signing-key.sec" ];
 
   # Enable audio
   services.pipewire = {
