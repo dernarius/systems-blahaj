@@ -80,6 +80,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # system utils
+    cryptsetup
     docker-compose
     duplicity
     fastfetch
