@@ -131,6 +131,7 @@
     mesa-demos
     gamescope
     mangohud
+    piper
 
     # applications
     abcde
