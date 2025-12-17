@@ -81,6 +81,7 @@
   environment.systemPackages = with pkgs; [
     # system utils
     cryptsetup
+    parted
     docker-compose
     duplicity
     fastfetch
