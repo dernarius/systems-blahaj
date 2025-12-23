@@ -170,6 +170,7 @@
 
     # games
     lunar-client
+    lutris
   ];
 
   fonts.packages = with pkgs; [
