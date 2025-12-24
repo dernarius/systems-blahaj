@@ -152,8 +152,7 @@
     trayscale
     thunderbird
     vlc
-    sweethome3d.application
-    sweethome3d.furniture-editor
+    blender
 
     # languages
     bun
