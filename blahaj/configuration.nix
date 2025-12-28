@@ -128,6 +128,8 @@
 
     # gaming
     amdgpu_top
+    clpeak
+    steam-run
     vulkan-tools
     mesa-demos
     gamescope
