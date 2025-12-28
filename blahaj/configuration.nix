@@ -127,6 +127,7 @@
     wget
 
     # gaming
+    amdgpu_top
     vulkan-tools
     mesa-demos
     gamescope
