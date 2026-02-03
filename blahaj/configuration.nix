@@ -141,6 +141,7 @@
     acpica-tools
     alacritty
     alacritty-theme
+    antigravity
     calibre
     deluge
     discord
