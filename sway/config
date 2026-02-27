@@ -118,6 +118,7 @@ exec --no-startup-id pa-notify -t 2
     bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
 
     bindsym $mod+Shift+u output DP-1 power toggle; output DP-2 power toggle
+    bindsym $mod+Shift+y exec systemctl suspend
 #
 # Top bar buttons
 #
