@@ -226,6 +226,59 @@
 
   programs.gamemode.enable = true;
 
+  # systemd.timers."my-backup" = {
+  #   wantedBy = [ "timers.target" ];
+  #   timerConfig = {
+  #     OnBootSec = "2 hours";
+  #     OnUnitActiveSec = "2 hours";
+  #     Unit = "my-backup.service";
+  #   };
+  # };
+
+  systemd.services."incremental-backup" = {
+    script = ''
+      ${pkgs.duplicity}/bin/duplicity incremental \
+        --encrypt-sign-key B64C29A6 \
+        --exclude /home/stk/.cache \
+        --exclude /home/stk/.mozilla \
+        --exclude /home/stk/.steam \
+        --exclude /home/stk/.bun \
+        --exclude /home/stk/.local/share/Steam \
+        --exclude /home/stk/Games \
+        /home/stk \
+        scp://girlboss//mnt/newtent/stk/blahaj
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "stk";
+    };
+    environment = {
+      PASSPHRASE = "";
+    };
+  };
+
+  systemd.services."full-backup" = {
+    script = ''
+      ${pkgs.duplicity}/bin/duplicity full \
+        --encrypt-sign-key B64C29A6 \
+        --exclude /home/stk/.cache \
+        --exclude /home/stk/.mozilla \
+        --exclude /home/stk/.steam \
+        --exclude /home/stk/.bun \
+        --exclude /home/stk/.local/share/Steam \
+        --exclude /home/stk/Games \
+        /home/stk \
+        scp://girlboss//mnt/newtent/stk/blahaj
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "stk";
+    };
+    environment = {
+      PASSPHRASE = "";
+    };
+  };
+
   services.blueman.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
