@@ -226,14 +226,14 @@
 
   programs.gamemode.enable = true;
 
-  # systemd.timers."my-backup" = {
-  #   wantedBy = [ "timers.target" ];
-  #   timerConfig = {
-  #     OnBootSec = "2 hours";
-  #     OnUnitActiveSec = "2 hours";
-  #     Unit = "my-backup.service";
-  #   };
-  # };
+  systemd.timers."backup" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "2 hours";
+      OnUnitActiveSec = "2 hours";
+      Unit = "incremental-backup.service";
+    };
+  };
 
   systemd.services."incremental-backup" = {
     script = ''
