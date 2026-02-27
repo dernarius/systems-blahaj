@@ -38,6 +38,8 @@ output * bg /home/stk/wallpaper-jr.jpg fill
 output eDP-1 position 0 1080
 output DP-7 position 1920 0
 output DP-8 position 5760 0
+output DP-1 position 0 0
+output DP-2 position 3840 360
 
 ### Idle configuration
 #
@@ -51,8 +53,8 @@ output DP-8 position 5760 0
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
-# exec swayidle -w \
-#          before-sleep 'swaylock -fF -i /home/stk/wallpaper-luckystar.jpg'
+exec swayidle -w \
+         before-sleep hyprlock
 
 ### Input configuration
 #
@@ -114,6 +116,8 @@ exec --no-startup-id pa-notify -t 2
     # bindsym $mod+i input type:keyboard xkb_layout lt
 
     bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
+
+    bindsym $mod+Shift+u output DP-1 power toggle; output DP-2 power toggle
 #
 # Top bar buttons
 #
@@ -225,7 +229,7 @@ exec --no-startup-id pa-notify -t 2
 #
 set $mode_system (l)ock, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec swaylock -fF -i /home/stk/wallpaper-luckystar.jpg, mode "default"
+    bindsym l exec hyprlock, mode "default"
     bindsym s exec systemctl suspend, mode "default"
     bindsym h exec systemctl hibernate, mode "default"
     bindsym r exec systemctl reboot, mode "default"
