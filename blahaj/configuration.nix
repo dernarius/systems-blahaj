@@ -73,9 +73,6 @@
 
   services.pulseaudio.enable = false;
 
-  hardware.ipu6.enable = true;
-  hardware.ipu6.platform = "ipu6ep";
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -95,9 +92,11 @@
     usbutils
     v4l-utils
     v4l2-relayd
+    pinentry-all
     
     # sway/wayland utils
     grim
+    hyprlock
     i3status
     mako
     rofi
@@ -105,8 +104,6 @@
     swayidle
     wl-clipboard
     wshowkeys
-    swaylock-effects
-    hyprlock
 
     # audio
     alsa-tools
@@ -153,7 +150,6 @@
     kicad
     obs-studio
     onlyoffice-desktopeditors
-    pinentry-all
     postman
     trayscale
     thunderbird
