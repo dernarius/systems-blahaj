@@ -102,7 +102,7 @@
     mako
     rofi
     slurp
-    swayidle
+    swayidle-effects
     wl-clipboard
     wshowkeys
 
