@@ -102,9 +102,10 @@
     mako
     rofi
     slurp
-    swayidle-effects
+    swayidle
     wl-clipboard
     wshowkeys
+    swaylock-effects
 
     # audio
     alsa-tools
