@@ -106,6 +106,7 @@
     wl-clipboard
     wshowkeys
     swaylock-effects
+    hyprlock
 
     # audio
     alsa-tools
