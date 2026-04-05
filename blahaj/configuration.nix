@@ -34,6 +34,16 @@
   networking.networkmanager.enable = true;
   # networking.wireless.userControlled.enable = true;
 
+  # 1. Disable NetworkManager's aggressive Wi-Fi power saving
+  networking.networkmanager.wifi.powersave = false;
+
+  # 2. Fix Intel Wi-Fi (iwlwifi) bugs by disabling AX and driver-level powersave
+  boot.extraModprobeConfig = ''
+    options iwlwifi disable_11ax=Y
+    options iwlwifi power_save=0
+    options iwlmvm power_scheme=1
+  '';
+
   # Set your time zone.
   time.timeZone = "Europe/Vilnius";
 
