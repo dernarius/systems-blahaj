@@ -150,7 +150,6 @@
     kicad
     obs-studio
     onlyoffice-desktopeditors
-    postman
     trayscale
     thunderbird
     vlc
