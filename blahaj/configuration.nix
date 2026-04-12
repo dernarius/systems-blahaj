@@ -197,50 +197,39 @@
 
     # tv mode switcher
     (writeShellScriptBin "toggle-tv-mode" ''
-      # 1. Get current TTY without sudo by reading the kernel sysfs directly
-      # This reads "tty1", strips out non-digits, and gives us "1"
+      # Get current TTY
       CURRENT_TTY=$(cat /sys/class/tty/tty0/active | tr -dc '0-9')
 
-      # 2. Helper function to find a PipeWire ID by its name dynamically
       set_audio_default() {
         local search_name="$1"
-        
-        # Grabs the status, finds the line with your DAC name, isolates the number before the period
         local node_id=$(wpctl status | grep -m 1 -i "$search_name" | awk -F'.' '{print $1}' | awk '{print $NF}')
         
         if [ -n "$node_id" ]; then
           wpctl set-default "$node_id"
-          echo "Success: Routed audio to $search_name (Current ID: $node_id)"
+          echo "Routed audio to $search_name (ID: $node_id)"
         else
-          echo "Warning: Could not find an active audio device matching '$search_name'"
+          echo "Warning: Could not find audio device '$search_name'"
         fi
       }
 
       if [ "$CURRENT_TTY" -eq 1 ]; then
         echo "Switching to TV Mode..."
-        
-        # Kill desktop Steam
         pkill steam
         sleep 2 
-        
-        # Route audio dynamically
-        set_audio_default "Fosi Audio ZD3 Analog Stereo"
+        set_audio_default "YOUR_TV_DAC_NAME"
 
-        # Launch TV session and switch TTY
-        sudo systemctl start tv-session.service
-        sudo chvt 8
+        # Using absolute paths injected by Nix to perfectly match sudo rules
+        sudo ${pkgs.systemd}/bin/systemctl start tv-session.service
+        sudo ${pkgs.kbd}/bin/chvt 8
 
       else
         echo "Switching to Desk Mode..."
         
-        # Kill TV session
-        sudo systemctl stop tv-session.service
+        # Using absolute paths here too
+        sudo ${pkgs.systemd}/bin/systemctl stop tv-session.service
+        set_audio_default "YOUR_DESK_DAC_NAME"
         
-        # Route audio dynamically back to desk
-        set_audio_default "ArturiaMsd Analog Stereo"
-        
-        # Switch TTY and restart desktop Steam
-        sudo chvt 1
+        sudo ${pkgs.kbd}/bin/chvt 1
         nohup steam > /dev/null 2>&1 &
       fi
     '')
