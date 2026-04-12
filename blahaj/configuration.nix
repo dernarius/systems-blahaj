@@ -2,12 +2,32 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   networking.hostName = "blahaj";
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_latest.override {
+    argsOverride = rec {
+      # Fetch the entire kernel tree from mkopec's bleeding-edge branch
+      src = pkgs.fetchFromGitHub {
+        owner = "mkopec";
+        repo = "linux";
+
+        # update these two when looking to update the kernel
+        rev = "1cac81ea1c86b194e4de3281890217c953d59033";
+        hash = lib.fakeHash; 
+      };
+      
+      # We override the version string so your system doesn't get confused 
+      # by kernel module mismatches. (Adjust the '6.18.0' part if his branch 
+      # has rebased to a newer mainline version since this writing).
+      version = "7.0.0-rc1-mkopec-frl";
+      modDirVersion = version;
+    };
+  });
   boot.kernelParams = [ "amd_pstate=active" ];
 
   hardware.graphics = {
@@ -173,6 +193,45 @@
     # games
     lunar-client
     lutris
+
+    # tv mode switcher
+    (writeShellScriptBin "toggle-tv-mode" ''
+      # Get current TTY
+      CURRENT_TTY=$(fgconsole)
+
+      if [ "$CURRENT_TTY" -eq 1 ]; then
+        echo "Switching to TV Mode..."
+        
+        # 1. Kill desktop Steam so it can launch in Gamescope
+        pkill steam
+        sleep 2 
+        
+        # 2. Switch PipeWire default audio to your TV USB DAC
+        # (We will need to find your exact DAC node name, see below)
+        wpctl set-default 89
+
+        # 3. Start the Gamescope service
+        sudo systemctl start tv-session.service
+        
+        # 4. Switch the GPU output to TTY8
+        sudo chvt 8
+
+      else
+        echo "Switching to Desk Mode..."
+        
+        # 1. Stop the TV session
+        sudo systemctl stop tv-session.service
+        
+        # 2. Switch PipeWire audio back to your Desk DAC
+        wpctl set-default 37
+        
+        # 3. Switch back to your Sway session on TTY1
+        sudo chvt 1
+        
+        # 4. Restart Steam in the background on your desktop
+        nohup steam > /dev/null 2>&1 &
+      fi
+    '')
   ];
 
   fonts.packages = with pkgs; [
@@ -224,6 +283,7 @@
   };
 
   programs.gamemode.enable = true;
+  programs.gamescope.enable = true;
 
   systemd.timers."backup" = {
     wantedBy = [ "timers.target" ];
@@ -278,6 +338,30 @@
     };
   };
 
+  systemd.services.tv-session = {
+    description = "Gamescope TV Session";
+    # Ensure it doesn't conflict with a login prompt
+    conflicts = [ "getty@tty8.service" ]; 
+    
+    serviceConfig = {
+      User = "stk"; # REPLACE WITH YOUR USERNAME
+      PAMName = "login";
+      TTYPath = "/dev/tty8";
+      StandardInput = "tty";
+      StandardOutput = "journal";
+      StandardError = "journal";
+      UtmpIdentifier = "tty8";
+      UtmpMode = "user";
+      Type = "simple";
+      
+      # The magic command. Adjust the -W and -H to your TV's resolution. 
+      # You may need to verify the output name (-O) is exactly HDMI-A-1 using swaymsg -t get_outputs
+      ExecStart = "${pkgs.gamescope}/bin/gamescope -e -W 3840 -H 2160 -r 120 -O HDMI-A-1 -- ${pkgs.steam}/bin/steam -gamepadui";
+      
+      Restart = "no";
+    };
+  };
+
   services.blueman.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
@@ -326,6 +410,17 @@
   };
 
   services.ratbagd.enable = true;
+
+  security.sudo.extraRules = [
+    {
+      users = [ "stk" ];
+      commands = [
+        { command = "${pkgs.kbd}/bin/chvt"; options = [ "NOPASSWD" ]; }
+        { command = "${pkgs.systemd}/bin/systemctl start tv-session.service"; options = [ "NOPASSWD" ]; }
+        { command = "${pkgs.systemd}/bin/systemctl stop tv-session.service"; options = [ "NOPASSWD" ]; }
+      ];
+    }
+  ];
 
   xdg.portal = {
     enable = true;
