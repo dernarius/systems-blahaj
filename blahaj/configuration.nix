@@ -18,7 +18,7 @@
 
         # update these two when looking to update the kernel
         rev = "1cac81ea1c86b194e4de3281890217c953d59033";
-        hash = lib.fakeHash; 
+        hash = "sha256-6CQcVnJ0VqfXKfz/v1a0kJsifBfh0SDuZm5J/7tyRzM="; 
       };
       
       # We override the version string so your system doesn't get confused 
