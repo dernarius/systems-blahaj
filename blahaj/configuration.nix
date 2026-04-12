@@ -354,6 +354,11 @@
       UtmpIdentifier = "tty8";
       UtmpMode = "user";
       Type = "simple";
+
+      Environment = [
+        "XDG_RUNTIME_DIR=/run/user/1000"
+        "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+      ];
       
       # The magic command. Adjust the -W and -H to your TV's resolution. 
       # You may need to verify the output name (-O) is exactly HDMI-A-1 using swaymsg -t get_outputs
