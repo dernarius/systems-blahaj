@@ -357,7 +357,7 @@
       
       # The magic command. Adjust the -W and -H to your TV's resolution. 
       # You may need to verify the output name (-O) is exactly HDMI-A-1 using swaymsg -t get_outputs
-      ExecStart = "${pkgs.gamescope}/bin/gamescope -e -W 3840 -H 2160 -r 120 -O HDMI-A-1 -- ${pkgs.steam}/bin/steam -gamepadui";
+      ExecStart = "${pkgs.gamescope}/bin/gamescope -e -W 3840 -H 2160 -r 60 -O HDMI-A-1 -- ${pkgs.steam}/bin/steam -gamepadui";
       
       Restart = "no";
     };
