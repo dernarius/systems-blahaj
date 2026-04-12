@@ -7,28 +7,29 @@
 {
   networking.hostName = "blahaj";
 
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_latest.override {
-    argsOverride = rec {
-      # Fetch the entire kernel tree from mkopec's bleeding-edge branch
-      src = pkgs.fetchFromGitHub {
-        owner = "mkopec";
-        repo = "linux";
-
-        # update these two when looking to update the kernel
-        rev = "1cac81ea1c86b194e4de3281890217c953d59033";
-        hash = "sha256-6CQcVnJ0VqfXKfz/v1a0kJsifBfh0SDuZm5J/7tyRzM="; 
-      };
-      
-      # We override the version string so your system doesn't get confused 
-      # by kernel module mismatches. (Adjust the '6.18.0' part if his branch 
-      # has rebased to a newer mainline version since this writing).
-      version = "7.0.0-rc1-mkopec-frl";
-      modDirVersion = version;
-    };
-  });
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [ "amd_pstate=active" ];
+
+  # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_latest.override {
+  #   argsOverride = rec {
+  #     # Fetch the entire kernel tree from mkopec's bleeding-edge branch
+  #     src = pkgs.fetchFromGitHub {
+  #       owner = "mkopec";
+  #       repo = "linux";
+  #
+  #       # update these two when looking to update the kernel
+  #       rev = "1cac81ea1c86b194e4de3281890217c953d59033";
+  #       hash = "sha256-6CQcVnJ0VqfXKfz/v1a0kJsifBfh0SDuZm5J/7tyRzM="; 
+  #     };
+  #
+  #     # We override the version string so your system doesn't get confused 
+  #     # by kernel module mismatches. (Adjust the '6.18.0' part if his branch 
+  #     # has rebased to a newer mainline version since this writing).
+  #     version = "7.0.0-rc1-mkopec-frl";
+  #     modDirVersion = version;
+  #   };
+  # });
+  # boot.kernelParams = [ "amd_pstate=active" ];
 
   hardware.graphics = {
     enable = true;
