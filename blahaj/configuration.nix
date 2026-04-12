@@ -216,7 +216,7 @@
         echo "Switching to TV Mode..."
         pkill steam
         sleep 2 
-        set_audio_default "YOUR_TV_DAC_NAME"
+        set_audio_default "Fosi Audio ZD3 Analog Stereo"
 
         # Using absolute paths injected by Nix to perfectly match sudo rules
         sudo ${pkgs.systemd}/bin/systemctl start tv-session.service
@@ -227,7 +227,7 @@
         
         # Using absolute paths here too
         sudo ${pkgs.systemd}/bin/systemctl stop tv-session.service
-        set_audio_default "YOUR_DESK_DAC_NAME"
+        set_audio_default "ArturiaMsd Analog Stereo"
         
         sudo ${pkgs.kbd}/bin/chvt 1
         nohup steam > /dev/null 2>&1 &
@@ -347,7 +347,7 @@
     serviceConfig = {
       User = "stk"; # REPLACE WITH YOUR USERNAME
       PAMName = "login";
-      TTYPath = "/dev/tty8";
+      TTYPath = "/dev/tty1";
       StandardInput = "tty";
       StandardOutput = "journal";
       StandardError = "journal";
