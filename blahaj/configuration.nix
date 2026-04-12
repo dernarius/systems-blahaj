@@ -197,39 +197,50 @@
 
     # tv mode switcher
     (writeShellScriptBin "toggle-tv-mode" ''
-      # Get current TTY
-      CURRENT_TTY=$(fgconsole)
+      # 1. Get current TTY without sudo by reading the kernel sysfs directly
+      # This reads "tty1", strips out non-digits, and gives us "1"
+      CURRENT_TTY=$(cat /sys/class/tty/tty0/active | tr -dc '0-9')
+
+      # 2. Helper function to find a PipeWire ID by its name dynamically
+      set_audio_default() {
+        local search_name="$1"
+        
+        # Grabs the status, finds the line with your DAC name, isolates the number before the period
+        local node_id=$(wpctl status | grep -m 1 -i "$search_name" | awk -F'.' '{print $1}' | awk '{print $NF}')
+        
+        if [ -n "$node_id" ]; then
+          wpctl set-default "$node_id"
+          echo "Success: Routed audio to $search_name (Current ID: $node_id)"
+        else
+          echo "Warning: Could not find an active audio device matching '$search_name'"
+        fi
+      }
 
       if [ "$CURRENT_TTY" -eq 1 ]; then
         echo "Switching to TV Mode..."
         
-        # 1. Kill desktop Steam so it can launch in Gamescope
+        # Kill desktop Steam
         pkill steam
         sleep 2 
         
-        # 2. Switch PipeWire default audio to your TV USB DAC
-        # (We will need to find your exact DAC node name, see below)
-        wpctl set-default 89
+        # Route audio dynamically
+        set_audio_default "Fosi Audio ZD3 Analog Stereo"
 
-        # 3. Start the Gamescope service
+        # Launch TV session and switch TTY
         sudo systemctl start tv-session.service
-        
-        # 4. Switch the GPU output to TTY8
         sudo chvt 8
 
       else
         echo "Switching to Desk Mode..."
         
-        # 1. Stop the TV session
+        # Kill TV session
         sudo systemctl stop tv-session.service
         
-        # 2. Switch PipeWire audio back to your Desk DAC
-        wpctl set-default 37
+        # Route audio dynamically back to desk
+        set_audio_default "ArturiaMsd Analog Stereo"
         
-        # 3. Switch back to your Sway session on TTY1
+        # Switch TTY and restart desktop Steam
         sudo chvt 1
-        
-        # 4. Restart Steam in the background on your desktop
         nohup steam > /dev/null 2>&1 &
       fi
     '')
