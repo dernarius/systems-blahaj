@@ -347,7 +347,7 @@
     serviceConfig = {
       User = "stk"; # REPLACE WITH YOUR USERNAME
       PAMName = "login";
-      TTYPath = "/dev/tty1";
+      TTYPath = "/dev/tty8";
       StandardInput = "tty";
       StandardOutput = "journal";
       StandardError = "journal";
