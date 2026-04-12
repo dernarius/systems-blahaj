@@ -39,6 +39,13 @@
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableAllFirmware = true;
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
+  hardware.xpadneo.enable = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
