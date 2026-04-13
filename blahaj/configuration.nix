@@ -82,6 +82,9 @@
     extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" "plugdev" "dialout" ];
     packages = with pkgs; [];
     shell = pkgs.zsh;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQ35CctJE0EAAABaMp1l4dK5jMNRJ4Pvv9fQjN8J2W3 stk@gnocchi"
+    ];
   };
 
   # Allow unfree packages
@@ -375,11 +378,19 @@
     };
   };
 
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
+    };
+  };
+
   services.blueman.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
-
-  services.avahi.enable = true;
 
   services.gvfs.enable = true;
 
@@ -423,6 +434,14 @@
   };
 
   services.ratbagd.enable = true;
+
+  services.openssh = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      PasswordAuthentication = false;
+    };
+  };
 
   security.sudo.extraRules = [
     {
