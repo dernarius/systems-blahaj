@@ -232,13 +232,13 @@
 
       else
         echo "Switching to Desk Mode..."
-        
-        # Using absolute paths here too
-        sudo ${pkgs.systemd}/bin/systemctl stop tv-session.service
-        set_audio_default "ArturiaMsd Analog Stereo"
-        
-        sudo ${pkgs.kbd}/bin/chvt 1
-        nohup steam > /dev/null 2>&1 &
+        (
+          sleep 1
+          sudo ${pkgs.systemd}/bin/systemctl stop tv-session.service
+          set_audio_default "ArturiaMsd Analog Stereo"
+          sudo ${pkgs.kbd}/bin/chvt 1
+          nohup steam > /dev/null 2>&1 &
+        ) </dev/null >/dev/null 2>&1 & disown
       fi
     '')
   ];
