@@ -175,7 +175,7 @@
     calibre
     deluge
     discord
-    # freecad
+    freecad
     gimp
     git
     inkscape
@@ -204,7 +204,7 @@
 
     # games
     lunar-client
-    # lutris
+    lutris
 
     # tv mode switcher
     (writeShellScriptBin "toggle-tv-mode" ''
