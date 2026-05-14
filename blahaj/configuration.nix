@@ -193,8 +193,8 @@
     gcc
     lua-language-server
     nixd
-    python312
-    python312Packages.pip
+    python313
+    python313Packages.pip
     rustup
     stylua
     uv
