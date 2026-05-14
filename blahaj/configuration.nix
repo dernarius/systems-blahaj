@@ -115,7 +115,6 @@
     duplicity
     fastfetch
     imagemagick
-    light
     ncdu
     powertop
     udiskie
