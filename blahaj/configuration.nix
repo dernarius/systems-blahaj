@@ -175,7 +175,7 @@
     calibre
     deluge
     discord
-    freecad
+    # freecad
     gimp
     git
     inkscape
