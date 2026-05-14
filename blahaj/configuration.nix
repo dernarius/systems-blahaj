@@ -177,6 +177,7 @@
     deluge
     discord
     freecad
+    gimp
     git
     inkscape
     kicad
