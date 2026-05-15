@@ -454,6 +454,12 @@
     }
   ];
 
+  services.udev.extraRules = ''
+  # Catch-all for Valve Hardware (Vendor ID 28de) to allow firmware flashing
+  SUBSYSTEM=="usb", ATTRS{idVendor}=="28de", MODE="0666"
+  KERNEL=="hidraw*", ATTRS{idVendor}=="28de", MODE="0666"
+'';
+
   xdg.portal = {
     enable = true;
     wlr.enable = true;
