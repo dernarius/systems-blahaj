@@ -444,21 +444,15 @@
     };
   };
 
-  security.sudo.extraRules = [
-    {
-      users = [ "stk" ];
-      commands = [
-        { command = "${pkgs.kbd}/bin/chvt"; options = [ "NOPASSWD" ]; }
-        { command = "${pkgs.systemd}/bin/systemctl start tv-session.service"; options = [ "NOPASSWD" ]; }
-        { command = "${pkgs.systemd}/bin/systemctl stop tv-session.service"; options = [ "NOPASSWD" ]; }
-      ];
-    }
-  ];
-
   systemd.services.mode-switcher-api = {
     description = "HTTP API for TV Mode Switching";
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
+
+    path = [ 
+      "/run/wrappers" 
+      "/run/current-system/sw" 
+    ];
     
     serviceConfig = {
       User = "stk"; # IMPORTANT: Run as your user so the sudo rules work!
