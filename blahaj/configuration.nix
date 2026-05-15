@@ -455,11 +455,40 @@
     }
   ];
 
-  services.udev.extraRules = ''
-  # Catch-all for Valve Hardware (Vendor ID 28de) to allow firmware flashing
-  SUBSYSTEM=="usb", ATTRS{idVendor}=="28de", MODE="0666"
-  KERNEL=="hidraw*", ATTRS{idVendor}=="28de", MODE="0666"
-'';
+  systemd.services.mode-switcher-api = {
+    description = "HTTP API for TV Mode Switching";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    
+    serviceConfig = {
+      User = "stk"; # IMPORTANT: Run as your user so the sudo rules work!
+      Restart = "always";
+    };
+
+    script = ''
+      ${pkgs.python3}/bin/python -c '
+      import http.server, socketserver, subprocess
+
+      class APIHandler(http.server.BaseHTTPRequestHandler):
+          def do_GET(self):
+              if self.path == "/toggle":
+                  self.send_response(200)
+                  self.send_header("Content-type", "text/plain")
+                  self.end_headers()
+                  self.wfile.write(b"Executing toggle script...\n")
+                  
+                  # Run the script in the background so the HTTP request finishes instantly
+                  subprocess.Popen(["/run/current-system/sw/bin/toggle-tv-mode"])
+              else:
+                  self.send_response(404)
+                  self.end_headers()
+
+      # Listen on all network interfaces on port 8080
+      print("Starting Mode Switcher API on port 8080...")
+      socketserver.TCPServer(("", 8080), APIHandler).serve_forever()
+      '
+    '';
+  };
 
   xdg.portal = {
     enable = true;
