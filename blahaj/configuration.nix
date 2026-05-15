@@ -209,6 +209,11 @@
 
     # tv mode switcher
     (writeShellScriptBin "toggle-tv-mode" ''
+      
+      # fix headless
+      export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+      export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+
       # Get current TTY
       CURRENT_TTY=$(cat /sys/class/tty/tty0/active | tr -dc '0-9')
 
