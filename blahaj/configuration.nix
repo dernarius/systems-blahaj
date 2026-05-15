@@ -84,6 +84,7 @@
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQ35CctJE0EAAABaMp1l4dK5jMNRJ4Pvv9fQjN8J2W3 stk@gnocchi"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFaHTcU7g2QVepww3v4un7pJlUU6XILcmgjM2dN//1Ny stk@blahaj"
     ];
   };
 
