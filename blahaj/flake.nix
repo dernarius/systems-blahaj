@@ -3,15 +3,23 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable }@inputs: 
+    let
+      system = "x86_64-linux";
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in {
 
     nixosConfigurations.blahaj = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      inherit system;
       
       # Pass flake inputs to modules (so you can use inputs.nixpkgs in other files)
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit nixpkgs-unstable; };
       
       modules = [
         ./configuration.nix
