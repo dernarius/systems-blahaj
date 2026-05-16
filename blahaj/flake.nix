@@ -19,7 +19,7 @@
       inherit system;
       
       # Pass flake inputs to modules (so you can use inputs.nixpkgs in other files)
-      specialArgs = { inherit nixpkgs-unstable; };
+      specialArgs = { inherit pkgs-unstable; };
       
       modules = [
         ./configuration.nix
