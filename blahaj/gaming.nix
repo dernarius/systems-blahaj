@@ -1,10 +1,14 @@
 { config, pkgs, pkgs-unstable, lib, ... }:
-{
-  environment.systemPackages = [
-    pkgs-unstable.boilr
-    pkgs-unstable.lunar-client
-    pkgs.lutris
-    pkgs-unstable.modrinth-app
-    pkgs-unstable.pcsx2
+let
+  stable = with pkgs; [
+    boilr
+    lunar-client
+    modrinth-app
+    pcsx2
+    lutris
   ];
+  unstable = with pkgs-unstable; [
+  ];
+in {
+  environment.systemPackages = stable ++ unstable;
 }
