@@ -189,9 +189,7 @@
     blender
 
     # languages
-    bun
     clang
-    gcc
     lua-language-server
     nixd
     python313
@@ -204,9 +202,11 @@
     ty
 
     # games
+    boilr
     lunar-client
     lutris
     modrinth-app
+    pcsx2
 
     # tv mode switcher
     (writeShellScriptBin "toggle-tv-mode" ''
