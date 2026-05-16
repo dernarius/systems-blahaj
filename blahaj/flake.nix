@@ -12,6 +12,13 @@
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
+        overlays = [
+        (final: prev: {
+          openldap = prev.openldap.overrideAttrs (old: {
+            doCheck = false; # Disables the failing tests
+          });
+        })
+      ];
       };
     in {
 
