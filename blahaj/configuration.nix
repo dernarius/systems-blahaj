@@ -205,7 +205,8 @@
 
     # games
     lunar-client
-    # lutris
+    lutris
+    modrinth-app
 
     # tv mode switcher
     (writeShellScriptBin "toggle-tv-mode" ''
