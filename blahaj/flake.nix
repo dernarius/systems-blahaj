@@ -16,6 +16,8 @@
       modules = [
         ./configuration.nix
         ./hardware-configuration.nix
+        ./gaming.nix
+        ./tv-shenanigans.nix
       ];
     };
 
