@@ -3,7 +3,7 @@ let
   stable = with pkgs; [
   ];
   unstable = with pkgs-unstable; [
-    gemini-cli
+    aider-chat
   ];
 in {
   environment.systemPackages = stable ++ unstable;
