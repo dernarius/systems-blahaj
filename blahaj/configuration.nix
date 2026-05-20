@@ -351,11 +351,6 @@
     };
   };
 
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-rocm;
-  };
-
   xdg.portal = {
     enable = true;
     wlr.enable = true;
