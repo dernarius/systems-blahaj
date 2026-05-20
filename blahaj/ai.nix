@@ -5,7 +5,6 @@ let
   ];
   unstable = with pkgs-unstable; [
     aider-chat
-    openclaw
   ];
 in {
   environment.systemPackages = stable ++ unstable;
