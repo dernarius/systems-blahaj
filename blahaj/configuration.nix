@@ -152,6 +152,7 @@
     alacritty
     alacritty-theme
     antigravity-fhs
+    blender
     calibre
     deluge
     discord
@@ -165,7 +166,7 @@
     trayscale
     thunderbird
     vlc
-    blender
+    zmk-studio
 
     # languages
     clang
