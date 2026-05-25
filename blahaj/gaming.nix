@@ -9,6 +9,7 @@ let
   unstable = with pkgs-unstable; [
     boilr
     lutris
+    zmk-studio
   ];
 in {
   environment.systemPackages = stable ++ unstable;

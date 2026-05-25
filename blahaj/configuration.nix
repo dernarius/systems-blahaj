@@ -166,7 +166,6 @@
     trayscale
     thunderbird
     vlc
-    zmk-studio
 
     # languages
     clang
