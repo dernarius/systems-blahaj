@@ -166,6 +166,7 @@
     trayscale
     thunderbird
     vlc
+    vivaldi
 
     # languages
     clang
