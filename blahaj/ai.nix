@@ -5,6 +5,7 @@ let
   ];
   unstable = with pkgs-unstable; [
     aider-chat
+    antigravity-fhs
   ];
 in {
   environment.systemPackages = stable ++ unstable;
