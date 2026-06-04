@@ -40,6 +40,7 @@ output DP-7 position 1920 0
 output DP-8 position 5760 0
 output DP-1 position 0 0
 output DP-2 position 3840 360
+output HDMI-A-1 disable
 
 ### Idle configuration
 #
@@ -75,6 +76,9 @@ input "1267:12866:VEN_04F3:00_04F3:3242_Touchpad" {
     scroll_factor 0.5
     tap enabled
     tap_button_map lrm
+}
+
+input "ZMK Project dernariboard Keyboard" {
 }
 
 input type:keyboard {
