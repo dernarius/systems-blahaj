@@ -2,7 +2,7 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
@@ -12,13 +12,6 @@
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
-        overlays = [
-        (final: prev: {
-          openldap = prev.openldap.overrideAttrs (old: {
-            doCheck = false; # Disables the failing tests
-          });
-        })
-      ];
       };
     in {
 
