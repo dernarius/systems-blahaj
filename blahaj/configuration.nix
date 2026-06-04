@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   networking.hostName = "blahaj";
@@ -58,8 +63,16 @@
   users.users.stk = {
     isNormalUser = true;
     description = "Stanislovas";
-    extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" "plugdev" "dialout" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+      "video"
+      "docker"
+      "plugdev"
+      "dialout"
+    ];
+    packages = with pkgs; [ ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQ35CctJE0EAAABaMp1l4dK5jMNRJ4Pvv9fQjN8J2W3 stk@gnocchi"
@@ -69,7 +82,10 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   boot.loader.systemd-boot.configurationLimit = 5;
   nix.gc.automatic = true;
   nix.gc.dates = "daily";
@@ -104,7 +120,7 @@
     v4l-utils
     v4l2-relayd
     pinentry-all
-    
+
     # sway/wayland utils
     grim
     hyprlock
@@ -123,7 +139,7 @@
     pamixer
     pasystray
     pavucontrol
-    
+
     # utils
     curl
     fd
@@ -173,13 +189,14 @@
     lua-language-server
     nixd
     nixfmt
-    python313
-    python313Packages.pip
+    python314
+    python314Packages.pip
     rustup
     stylua
     uv
     zig
     zsh
+    tree-sitter
     ty
   ];
 
@@ -322,7 +339,7 @@
           main = {
             capslock = "overload(control, esc)"; # you might need to also enclose the key in quotes if it contains non-alphabetical symbols
           };
-          otherlayer = {};
+          otherlayer = { };
         };
         extraConfig = ''
           # put here any extra-config, e.g. you can copy/paste here directly a configuration, just remove the ids part
@@ -361,8 +378,10 @@
   virtualisation.docker.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 
-    6969 8000 8080  # development stuff
+  networking.firewall.allowedTCPPorts = [
+    6969
+    8000
+    8080 # development stuff
   ];
 
   # networking.firewall.allowedUDPPorts = [ ... ];
