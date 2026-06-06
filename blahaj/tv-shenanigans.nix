@@ -38,7 +38,7 @@
 
         sleep 2
 
-        set_audio_default "Navi 48 HDMI/DP Audio Controller Digital Stereo (HDMI)"
+        set_audio_default "Navi 48 HDMI/DP Audio Controller Digital Stereo (HDMI 3)"
 
       else
         echo "Switching to Desk Mode..."
