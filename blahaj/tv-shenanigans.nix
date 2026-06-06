@@ -7,6 +7,7 @@
 {
   environment.systemPackages = with pkgs; [
     (writeShellScriptBin "toggle-tv-mode" ''
+      #/usr/bin/env zsh
 
       # fix headless
       export XDG_RUNTIME_DIR="/run/user/$(id -u)"
@@ -22,8 +23,10 @@
         if [ -n "$node_id" ]; then
           wpctl set-default "$node_id"
           echo "Routed audio to $search_name (ID: $node_id)"
+          return 0
         else
           echo "Warning: Could not find audio device '$search_name'"
+          return 1
         fi
       }
 
@@ -36,9 +39,9 @@
         sudo ${pkgs.systemd}/bin/systemctl start tv-session.service
         sudo ${pkgs.kbd}/bin/chvt 8
 
-        sleep 5
-
-        set_audio_default "Navi 48 HDMI/DP Audio Controller Digital Stereo (HDMI 3)"
+        while ! set_audio_default "Navi 48 HDMI/DP Audio Controller Digital Stereo (HDMI 3)"; do
+          sleep 0.1
+        done
 
       else
         echo "Switching to Desk Mode..."
