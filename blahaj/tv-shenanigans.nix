@@ -31,11 +31,12 @@
         echo "Switching to TV Mode..."
         pkill steam
         sleep 2 
-        set_audio_default "Navi 48 HDMI/DP Audio Controller Digital Stereo (HDMI)"
 
         # Using absolute paths injected by Nix to perfectly match sudo rules
         sudo ${pkgs.systemd}/bin/systemctl start tv-session.service
         sudo ${pkgs.kbd}/bin/chvt 8
+
+        set_audio_default "Navi 48 HDMI/DP Audio Controller Digital Stereo (HDMI)"
 
       else
         echo "Switching to Desk Mode..."
