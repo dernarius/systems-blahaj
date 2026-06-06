@@ -36,7 +36,7 @@
         sudo ${pkgs.systemd}/bin/systemctl start tv-session.service
         sudo ${pkgs.kbd}/bin/chvt 8
 
-        sleep 2
+        sleep 5
 
         set_audio_default "Navi 48 HDMI/DP Audio Controller Digital Stereo (HDMI 3)"
 
