@@ -1,8 +1,13 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
     (writeShellScriptBin "toggle-tv-mode" ''
-      
+
       # fix headless
       export XDG_RUNTIME_DIR="/run/user/$(id -u)"
       export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
@@ -26,7 +31,8 @@
         echo "Switching to TV Mode..."
         pkill steam
         sleep 2 
-        set_audio_default "Fosi Audio ZD3 Analog Stereo"
+        # set_audio_default "Fosi Audio ZD3 Analog Stereo"
+        set_audio_default "Navi 48 HDMI/DP Audio Controller"
 
         # Using absolute paths injected by Nix to perfectly match sudo rules
         sudo ${pkgs.systemd}/bin/systemctl start tv-session.service
@@ -48,8 +54,8 @@
   systemd.services.tv-session = {
     description = "Gamescope TV Session";
     # Ensure it doesn't conflict with a login prompt
-    conflicts = [ "getty@tty8.service" ]; 
-    
+    conflicts = [ "getty@tty8.service" ];
+
     serviceConfig = {
       User = "stk"; # REPLACE WITH YOUR USERNAME
       PAMName = "login";
@@ -65,8 +71,8 @@
         "XDG_RUNTIME_DIR=/run/user/1000"
         "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
       ];
-      
-      # The magic command. Adjust the -W and -H to your TV's resolution. 
+
+      # The magic command. Adjust the -W and -H to your TV's resolution.
       # You may need to verify the output name (-O) is exactly HDMI-A-1 using swaymsg -t get_outputs
       ExecStart = "${pkgs.gamescope}/bin/gamescope -e -W 3840 -H 2160 -r 60 -O HDMI-A-1 -- ${pkgs.libcap}/bin/capsh --caps= -- -c 'exec ${pkgs.steam}/bin/steam -gamepadui'";
       Restart = "no";
@@ -77,9 +83,18 @@
     {
       users = [ "stk" ];
       commands = [
-        { command = "${pkgs.kbd}/bin/chvt"; options = [ "NOPASSWD" ]; }
-        { command = "${pkgs.systemd}/bin/systemctl start tv-session.service"; options = [ "NOPASSWD" ]; }
-        { command = "${pkgs.systemd}/bin/systemctl stop tv-session.service"; options = [ "NOPASSWD" ]; }
+        {
+          command = "${pkgs.kbd}/bin/chvt";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.systemd}/bin/systemctl start tv-session.service";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.systemd}/bin/systemctl stop tv-session.service";
+          options = [ "NOPASSWD" ];
+        }
       ];
     }
   ];
@@ -89,11 +104,11 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
 
-    path = [ 
-      "/run/wrappers" 
-      "/run/current-system/sw" 
+    path = [
+      "/run/wrappers"
+      "/run/current-system/sw"
     ];
-    
+
     serviceConfig = {
       User = "stk"; # IMPORTANT: Run as your user so the sudo rules work!
       Restart = "always";
