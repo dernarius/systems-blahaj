@@ -31,8 +31,7 @@
         echo "Switching to TV Mode..."
         pkill steam
         sleep 2 
-        # set_audio_default "Fosi Audio ZD3 Analog Stereo"
-        set_audio_default "Navi 48 HDMI/DP Audio Controller"
+        set_audio_default "Navi 48 HDMI/DP Audio Controller Digital Stereo (HDMI)"
 
         # Using absolute paths injected by Nix to perfectly match sudo rules
         sudo ${pkgs.systemd}/bin/systemctl start tv-session.service
