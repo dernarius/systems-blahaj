@@ -111,6 +111,7 @@
     duplicity
     fastfetch
     imagemagick
+    kanshi
     ncdu
     powertop
     udiskie
