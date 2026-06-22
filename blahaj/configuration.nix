@@ -151,6 +151,7 @@
     just
     nomacs
     playerctl
+    sacad
     tesseract
     tree
     wget
