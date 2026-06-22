@@ -64,13 +64,14 @@
     isNormalUser = true;
     description = "Stanislovas";
     extraGroups = [
-      "networkmanager"
-      "wheel"
       "audio"
-      "video"
-      "docker"
-      "plugdev"
+      "cdrom"
       "dialout"
+      "docker"
+      "networkmanager"
+      "plugdev"
+      "video"
+      "wheel"
     ];
     packages = with pkgs; [ ];
     shell = pkgs.zsh;
@@ -142,6 +143,7 @@
     pavucontrol
 
     # utils
+    abcde
     curl
     fd
     gnumake
