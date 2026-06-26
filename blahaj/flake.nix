@@ -19,7 +19,7 @@
         config.allowUnfree = true;
         overlays = [
           (final: prev: {
-            openldap = prev.openblas.overrideAttrs (old: {
+            openblas = prev.openblas.overrideAttrs (old: {
               doCheck = false; # Disables the failing tests
             });
           })
