@@ -175,7 +175,6 @@
     acpica-tools
     alacritty
     alacritty-theme
-    antigravity-fhs
     blender
     calibre
     deluge
