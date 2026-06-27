@@ -18,11 +18,11 @@
         inherit system;
         config.allowUnfree = true;
         overlays = [
-          (final: prev: {
-            openblas = prev.openblas.overrideAttrs (old: {
-              doCheck = false; # Disables the failing tests
-            });
-          })
+          # (final: prev: {
+          #   openblas = prev.openblas.overrideAttrs (old: {
+          #     doCheck = false; # Disables the failing tests
+          #   });
+          # })
         ];
       };
     in

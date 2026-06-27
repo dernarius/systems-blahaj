@@ -10,7 +10,7 @@ let
     lunar-client
     pcsx2
     steam-rom-manager
-    wineWowPackages.stable
+    wineWow64Packages.stable
     winetricks
   ];
   unstable = with pkgs-unstable; [
