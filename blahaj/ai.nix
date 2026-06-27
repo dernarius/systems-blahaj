@@ -9,8 +9,6 @@ let
   stable = with pkgs; [
   ];
   unstable = with pkgs-unstable; [
-    aider-chat
-    antigravity-fhs
   ];
 in
 {
