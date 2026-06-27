@@ -8,7 +8,6 @@
 let
   stable = with pkgs; [
     lunar-client
-    # modrinth-app
     pcsx2
     steam-rom-manager
   ];
