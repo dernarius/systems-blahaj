@@ -320,7 +320,7 @@
 
   services.udisks2.enable = true;
 
-  services.tumbler.enable = true;
+  # services.tumbler.enable = true;
 
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "client";
