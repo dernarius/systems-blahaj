@@ -184,7 +184,6 @@
     gimp
     git
     inkscape
-    kicad
     obs-studio
     onlyoffice-desktopeditors
     trayscale
