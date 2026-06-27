@@ -1,13 +1,19 @@
-{ config, pkgs, pkgs-unstable, lib, ... }:
+{
+  config,
+  pkgs,
+  pkgs-unstable,
+  lib,
+  ...
+}:
 let
   stable = with pkgs; [
-    searxng
   ];
   unstable = with pkgs-unstable; [
     aider-chat
     antigravity-fhs
   ];
-in {
+in
+{
   environment.systemPackages = stable ++ unstable;
   services.ollama = {
     enable = true;

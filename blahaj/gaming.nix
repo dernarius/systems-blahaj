@@ -1,4 +1,10 @@
-{ config, pkgs, pkgs-unstable, lib, ... }:
+{
+  config,
+  pkgs,
+  pkgs-unstable,
+  lib,
+  ...
+}:
 let
   stable = with pkgs; [
     lunar-client
@@ -9,8 +15,8 @@ let
   unstable = with pkgs-unstable; [
     boilr
     lutris
-    zmk-studio
   ];
-in {
+in
+{
   environment.systemPackages = stable ++ unstable;
 }
