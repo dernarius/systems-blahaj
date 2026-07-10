@@ -375,7 +375,7 @@
     enable = true;
     settings = rec {
       initial_session = {
-        command = "${pkgs.swayfx}/bin/sway";
+        command = "${pkgs.swayfx}/bin/sway --verbose";
         user = "stk";
       };
       default_session = initial_session;
