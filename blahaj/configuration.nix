@@ -249,30 +249,30 @@
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;
 
-  systemd.services.desktop-session = {
-    enable = true;
-    conflicts = [ "getty@tty1.service" ];
-    after = [ "network.target" ];
-    wantedBy = [ "default.target" ];
-    serviceConfig = {
-      User = "stk";
-      PAMName = "login";
-      TTYPath = "/dev/tty1";
-      StandardInput = "tty";
-      StandardOutput = "journal";
-      StandardError = "journal";
-      UtmpIdentifier = "tty1";
-      UtmpMode = "user";
-      Type = "simple";
-
-      Environment = [
-        "XDG_RUNTIME_DIR=/run/user/1000"
-        "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
-      ];
-
-      ExecStart = "${pkgs.swayfx}/bin/sway --verbose";
-    };
-  };
+  # systemd.services.desktop-session = {
+  #   enable = true;
+  #   conflicts = [ "getty@tty1.service" ];
+  #   after = [ "network.target" ];
+  #   wantedBy = [ "default.target" ];
+  #   serviceConfig = {
+  #     User = "stk";
+  #     PAMName = "login";
+  #     TTYPath = "/dev/tty1";
+  #     StandardInput = "tty";
+  #     StandardOutput = "journal";
+  #     StandardError = "journal";
+  #     UtmpIdentifier = "tty1";
+  #     UtmpMode = "user";
+  #     Type = "simple";
+  #
+  #     Environment = [
+  #       "XDG_RUNTIME_DIR=/run/user/1000"
+  #       "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+  #     ];
+  #
+  #     ExecStart = "${pkgs.swayfx}/bin/sway --verbose";
+  #   };
+  # };
 
   systemd.timers."backup" = {
     wantedBy = [ "timers.target" ];
@@ -371,16 +371,16 @@
     };
   };
 
-  # services.greetd = {
-  #   enable = true;
-  #   settings = rec {
-  #     initial_session = {
-  #       command = "${pkgs.swayfx}/bin/sway";
-  #       user = "stk";
-  #     };
-  #     default_session = initial_session;
-  #   };
-  # };
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      initial_session = {
+        command = "${pkgs.swayfx}/bin/sway";
+        user = "stk";
+      };
+      default_session = initial_session;
+    };
+  };
 
   services.ratbagd.enable = true;
 
