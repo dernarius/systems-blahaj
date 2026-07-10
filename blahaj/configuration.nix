@@ -249,10 +249,9 @@
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;
 
-  systemd.services.desktop = {
+  systemd.services.desktop-session = {
     enable = true;
     serviceConfig = {
-      Type = "simple";
       User = "stk";
       PAMName = "login";
       TTYPath = "/dev/tty1";
@@ -261,10 +260,13 @@
       StandardError = "journal";
       UtmpIdentifier = "tty1";
       UtmpMode = "user";
+      Type = "simple";
+
       Environment = [
-        "XDG_RUNTIME_DIR=unix:path=/run/user/1000"
+        "XDG_RUNTIME_DIR=/run/user/1000"
         "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
       ];
+
       ExecStart = "${pkgs.swayfx}/bin/sway --verbose";
       Restart = "yes";
     };

@@ -62,7 +62,7 @@
     conflicts = [ "getty@tty8.service" ];
 
     serviceConfig = {
-      User = "stk"; # REPLACE WITH YOUR USERNAME
+      User = "stk";
       PAMName = "login";
       TTYPath = "/dev/tty8";
       StandardInput = "tty";
