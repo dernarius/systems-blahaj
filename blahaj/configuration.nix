@@ -249,6 +249,16 @@
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;
 
+  systemd.services.desktop = {
+    script = ''
+      ${pkgs.swayfx}/bin/sway --verbose
+    '';
+    serviceConfig = {
+      Type = "simple";
+      User = "stk";
+    };
+  };
+
   systemd.timers."backup" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
@@ -356,16 +366,6 @@
   #     default_session = initial_session;
   #   };
   # };
-
-  services.desktop = {
-    script = ''
-      ${pkgs.swayfx}/bin/sway --verbose
-    '';
-    serviceConfig = {
-      Type = "simple";
-      User = "stk";
-    };
-  };
 
   services.ratbagd.enable = true;
 
