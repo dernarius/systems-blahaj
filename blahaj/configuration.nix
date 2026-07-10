@@ -250,17 +250,23 @@
   programs.gamescope.enable = true;
 
   systemd.services.desktop = {
-    script = ''
-      ${pkgs.swayfx}/bin/sway --verbose
-    '';
+    enable = true;
+    ExecStart = "${pkgs.swayfx}/bin/sway --verbose";
     serviceConfig = {
       Type = "simple";
       User = "stk";
-      Enabled = true;
+      PAMName = "login";
+      TTYPath = "/dev/tty1";
+      StandardInput = "tty";
+      StandardOutput = "journal";
+      StandardError = "journal";
+      UtmpIdentifier = "tty1";
+      UtmpMode = "user";
     };
-    environment = {
-      DBUS_SESSION_BUS_ADDRESS = "unix:path=/run/user/1000/bus";
-    };
+    environment = [
+      "XDG_RUNTIME_DIR=unix:path=/run/user/1000"
+      "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+    ];
   };
 
   systemd.timers."backup" = {
