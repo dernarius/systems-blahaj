@@ -346,14 +346,24 @@
     };
   };
 
-  services.greetd = {
-    enable = true;
-    settings = rec {
-      initial_session = {
-        command = "${pkgs.swayfx}/bin/sway";
-        user = "stk";
-      };
-      default_session = initial_session;
+  # services.greetd = {
+  #   enable = true;
+  #   settings = rec {
+  #     initial_session = {
+  #       command = "${pkgs.swayfx}/bin/sway";
+  #       user = "stk";
+  #     };
+  #     default_session = initial_session;
+  #   };
+  # };
+
+  services.desktop = {
+    script = ''
+      ${pkgs.swayfx}/bin/sway --verbose
+    '';
+    serviceConfig = {
+      Type = "simple";
+      User = "stk";
     };
   };
 
