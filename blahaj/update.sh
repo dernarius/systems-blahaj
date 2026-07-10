@@ -17,4 +17,4 @@ git add .
 git commit -m "flake update"
 
 # export NIXPKGS_ALLOW_BROKEN=1
-sudo nixos-rebuild switch --flake .#blahaj
+sudo nixos-rebuild switch --flake .#blahaj --verbose
