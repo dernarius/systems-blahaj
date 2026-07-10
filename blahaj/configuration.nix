@@ -145,7 +145,6 @@
     # utils
     abcde
     curl
-    dbus
     fd
     gnumake
     jq
@@ -257,7 +256,10 @@
     serviceConfig = {
       Type = "simple";
       User = "stk";
-      Enable = true;
+      Enabled = true;
+    };
+    environment = {
+      DBUS_SESSION_BUS_ADDRESS = "unix:path=/run/user/1000/bus";
     };
   };
 
