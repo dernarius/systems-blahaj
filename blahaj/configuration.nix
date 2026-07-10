@@ -145,6 +145,7 @@
     # utils
     abcde
     curl
+    dbus
     fd
     gnumake
     jq
@@ -256,6 +257,7 @@
     serviceConfig = {
       Type = "simple";
       User = "stk";
+      Enable = true;
     };
   };
 
