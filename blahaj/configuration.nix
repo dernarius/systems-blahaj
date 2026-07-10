@@ -251,6 +251,8 @@
 
   systemd.services.desktop-session = {
     enable = true;
+    after = [ "network.target" ];
+    wantedBy = [ "default.target" ];
     serviceConfig = {
       User = "stk";
       PAMName = "login";
