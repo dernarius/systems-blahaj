@@ -251,7 +251,7 @@
 
   systemd.services.desktop-session = {
     enable = true;
-    conflicts = [ "getty@tty8.service" ];
+    conflicts = [ "getty@tty1.service" ];
     after = [ "network.target" ];
     wantedBy = [ "default.target" ];
     serviceConfig = {
