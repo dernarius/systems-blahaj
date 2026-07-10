@@ -251,7 +251,6 @@
 
   systemd.services.desktop = {
     enable = true;
-    ExecStart = "${pkgs.swayfx}/bin/sway --verbose";
     serviceConfig = {
       Type = "simple";
       User = "stk";
@@ -262,11 +261,13 @@
       StandardError = "journal";
       UtmpIdentifier = "tty1";
       UtmpMode = "user";
+      Environment = [
+        "XDG_RUNTIME_DIR=unix:path=/run/user/1000"
+        "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+      ];
+      ExecStart = "${pkgs.swayfx}/bin/sway --verbose";
+      Restart = "yes";
     };
-    environment = [
-      "XDG_RUNTIME_DIR=unix:path=/run/user/1000"
-      "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
-    ];
   };
 
   systemd.timers."backup" = {
