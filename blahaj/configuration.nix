@@ -159,6 +159,7 @@
     thunar-volman
     tree
     wget
+    zellij
 
     # gaming
     amdgpu_top
@@ -185,7 +186,6 @@
     inkscape
     obs-studio
     onlyoffice-desktopeditors
-    trayscale
     thunderbird
     vlc
     vivaldi
