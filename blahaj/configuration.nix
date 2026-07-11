@@ -196,11 +196,10 @@
     nixd
     nixfmt
     python314
-    python314Packages.pip
     rustup
+    rust-analyzer
     stylua
     uv
-    zig
     zsh
     tree-sitter
     ty
