@@ -216,6 +216,10 @@
     enable = true;
   };
 
+  programs.direnv = {
+    enable = true;
+  };
+
   programs.sway = {
     enable = true;
     package = pkgs.swayfx;
