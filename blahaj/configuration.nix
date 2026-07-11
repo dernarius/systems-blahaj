@@ -196,7 +196,6 @@
     nixd
     nixfmt
     python314
-    rustup
     rust-analyzer
     stylua
     uv
