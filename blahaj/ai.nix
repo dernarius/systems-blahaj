@@ -9,6 +9,7 @@ let
   stable = with pkgs; [
   ];
   unstable = with pkgs-unstable; [
+    claude-code
   ];
 in
 {
