@@ -192,6 +192,7 @@
 
     # languages
     clang
+    go
     lua-language-server
     nixd
     nixfmt
