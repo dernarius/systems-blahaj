@@ -191,8 +191,9 @@
     vivaldi
 
     # languages
-    clang
+    gcc
     go
+    gopls
     lua-language-server
     nixd
     nixfmt
