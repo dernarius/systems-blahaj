@@ -9,6 +9,7 @@ let
   stable = with pkgs; [
     lunar-client
     modrinth-app
+    openttd
     pcsx2
     steam-rom-manager
     wineWow64Packages.stable
