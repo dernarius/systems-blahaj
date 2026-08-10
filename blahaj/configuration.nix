@@ -180,6 +180,7 @@
     calibre
     deluge
     discord
+    feishin
     freecad
     gimp
     git
