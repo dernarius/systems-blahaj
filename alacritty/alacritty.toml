@@ -23,3 +23,8 @@ y = 0
 
 [general]
 import = ["/home/stk/.config/alacritty/themes/themes/solarized_light.toml"]
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"

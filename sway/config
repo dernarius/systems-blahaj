@@ -27,7 +27,7 @@ workspace_auto_back_and_forth yes
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /run/current-system/sw/share/backgrounds/sway/)
-output * bg /home/stk/wallpaper-jr.jpg fill
+output * bg /home/stk/chebra.jpg fill
 #
 # Example configuration:
 #
@@ -35,11 +35,6 @@ output * bg /home/stk/wallpaper-jr.jpg fill
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
-output eDP-1 position 0 1080
-output DP-7 position 1920 0
-output DP-8 position 5760 0
-output DP-1 position 0 0
-output DP-2 position 3840 360
 output HDMI-A-1 disable
 
 ### Idle configuration
@@ -57,6 +52,8 @@ output HDMI-A-1 disable
 exec swayidle -w \
          before-sleep hyprlock
 
+
+exec --no-startup-id kanshi
 ### Input configuration
 #
 # Example configuration:

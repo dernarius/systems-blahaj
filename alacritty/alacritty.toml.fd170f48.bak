@@ -1,0 +1,25 @@
+[cursor.style]
+shape = "Block"
+blinking = "Never"
+
+[font]
+size = 16
+
+[font.bold]
+family = "Monofur Nerd Font"
+
+[font.italic]
+family = "Monofur Nerd Font"
+
+[font.normal]
+family = "Monofur Nerd Font"
+
+[window]
+opacity = 0.8
+
+[window.padding]
+x = 0
+y = 0
+
+[general]
+import = ["/home/stk/.config/alacritty/themes/themes/solarized_light.toml"]
