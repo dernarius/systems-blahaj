@@ -13,7 +13,10 @@
   networking.hostName = "blahaj";
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "amd_pstate=active" ];
+  boot.kernelParams = [
+    "amd_pstate=active"
+    "usb-storage.quirks=152d:0562:u"
+  ];
 
   hardware.graphics = {
     enable = true;
