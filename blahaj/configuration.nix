@@ -131,7 +131,6 @@
     hyprlock
     i3status
     mako
-    nwg-panel
     rofi
     slurp
     swayidle
@@ -144,6 +143,7 @@
     pa-notify
     pamixer
     pasystray
+    pnmixer
     pavucontrol
 
     # utils
