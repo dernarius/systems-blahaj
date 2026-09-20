@@ -131,6 +131,7 @@
     hyprlock
     i3status
     mako
+    nwg-panel
     rofi
     slurp
     swayidle
