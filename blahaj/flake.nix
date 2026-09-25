@@ -40,6 +40,7 @@
           ./ai.nix
           ./gaming.nix
           ./tv-shenanigans.nix
+          ./audio-toggle.nix
         ];
       };
 
