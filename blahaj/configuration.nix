@@ -118,6 +118,7 @@
     kanshi
     ncdu
     powertop
+    shpool
     udiskie
     udisks
     unzip
