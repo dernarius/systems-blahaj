@@ -189,6 +189,7 @@
     freecad
     gimp
     git
+    keepassxc
     inkscape
     obs-studio
     onlyoffice-desktopeditors
@@ -394,6 +395,14 @@
 
   services.ratbagd.enable = true;
 
+  services.syncthing = {
+    enable = true;
+    user = "stk";
+    group = "users";
+    dataDir = "/home/stk";
+    configDir = "/home/stk/.config/syncthing";
+  };
+
   services.openssh = {
     enable = true;
     openFirewall = true;
@@ -415,6 +424,7 @@
     6969
     8000
     8080 # development stuff
+    8384 # syncthing
   ];
 
   # networking.firewall.allowedUDPPorts = [ ... ];
